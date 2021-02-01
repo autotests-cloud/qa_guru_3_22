@@ -3,6 +3,9 @@ package tests;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +18,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static helpers.AttachmentsHelper.*;
 import static io.qameta.allure.Allure.step;
 
+@Feature("Form fill tests")
+@Story("Student registration")
 public class StudentRegistrationFormTests extends TestBase {
 
     @Test
@@ -158,6 +163,7 @@ public class StudentRegistrationFormTests extends TestBase {
             $("#submit").click();
         });
 
+        // todo bad assert
         step("Verify successful form submit", () -> {
             $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
             $x("//td[text()='Student Name']").parent().shouldHave(text(firstName + " " + lastName));
