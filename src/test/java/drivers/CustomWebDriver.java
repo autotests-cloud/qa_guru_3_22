@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -26,7 +27,10 @@ public class CustomWebDriver implements WebDriverProvider {
         WebDriverManager.chromedriver().setup();
 
         if(System.getProperty("remote.browser.url") != null) {
-            return new RemoteWebDriver(getRemoteWebdriverUrl(), capabilities);
+            RemoteWebDriver remoteWebDriver = new RemoteWebDriver(getRemoteWebdriverUrl(), capabilities);
+            remoteWebDriver.setFileDetector(new LocalFileDetector());
+
+            return remoteWebDriver;
         } else {
             return new ChromeDriver(capabilities);
         }
