@@ -194,8 +194,8 @@ public class StudentRegistrationFormTests extends TestBase {
         });
 
         step("Last name input should be marked with red border", () -> {
-            $("#lastName").shouldHave(cssValue("border-color", "#dc3545"));
-//            $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+//            $("#lastName").shouldHave(cssValue("border-color", "#dc3545"));
+            $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         });
     }
 }
