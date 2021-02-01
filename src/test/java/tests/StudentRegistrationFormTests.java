@@ -3,6 +3,7 @@ package tests;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Locale;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static helpers.AttachmentsHelper.*;
@@ -176,6 +177,25 @@ public class StudentRegistrationFormTests extends TestBase {
             $x("//td[text()='Picture']").parent().shouldHave(text(picture));
             $x("//td[text()='Address']").parent().shouldHave(text(currentAddress));
             $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
+        });
+    }
+
+    @Test
+    @AllureId("1513")
+    @DisplayName("Unsuccessful fill registration form without Last name")
+    void unsuccessfulFillFormWithoutLastName() {
+        step("Open students registration form", () -> {
+            open("https://demoqa.com/automation-practice-form");
+            $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        });
+
+        step("Fill students registration form without Last name", () -> {
+            $("#submit").click();
+        });
+
+        step("Last name input should be marked with red border", () -> {
+            $("#lastName").shouldHave(cssValue("border-color", "#dc3545"));
+//            $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         });
     }
 }
