@@ -16,6 +16,7 @@ public class TestBase {
     static void setup() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         Configuration.browser = CustomWebDriver.class.getName();
+        Configuration.startMaximized = true;
 
     }
 
