@@ -45,7 +45,7 @@ public class CustomWebDriver implements WebDriverProvider {
 
     private URL getRemoteWebdriverUrl() {
         try {
-            return new URL(System.getProperty("remote.browser.url"));
+            return new URL(System.getProperty("remote.browser.url") + ":4444/wd/hub/");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
